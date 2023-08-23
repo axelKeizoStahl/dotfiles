@@ -1,0 +1,216 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+background = #000000
+background-alt = #373B41
+foreground = #C5C8C6
+primary = #F0C674
+secondary = #8ABEB7
+alert = #A54242
+disabled = #707880
+
+
+[bar/top]
+monitor = eDP1
+
+bottom = true
+width = 100%
+height = 19pt
+
+; dpi = 96
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3pt
+
+padding-left = 0
+padding-right = 1
+padding-top = 2
+
+module-margin = 1
+
+border-top-size = 2pt
+border-color = #00000000
+
+separator = |
+separator-foreground = ${colors.disabled}
+
+font-0 = monospace;2
+font-1 = JoyPixels:scale=8
+
+modules-left = xworkspaces xwindow railway
+modules-right = wallchanger pulseaudio cpu xkeyboard date battery
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = true
+
+; tray-position = right
+
+; wm-restack = generic
+wm-restack = bspwm
+; wm-restack = i3
+
+; override-redirect = true
+
+[bar/top_external]
+monitor = HDMI1
+
+bottom = true
+width = 100%
+height = 21pt
+
+; dpi = 96
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3pt
+
+
+padding-left = 0
+padding-right = 1
+padding-top = 2
+
+module-margin = 1
+
+border-top-size = 2pt
+border-color = #00000000
+
+separator = |
+separator-foreground = ${colors.disabled}
+
+font-0 = monospace;2
+font-1 = JoyPixels:scale=8
+
+modules-left = xworkspaces xwindow railway
+modules-right = wallchanger pulseaudio cpu xkeyboard date battery
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = true
+
+; tray-position = right
+
+; wm-restack = generic
+wm-restack = bspwm
+; wm-restack = i3
+
+; override-redirect = true
+
+[module/railway]
+type = custom/script
+exec = "python3 -u /home/axel/repos/railway-statusbar/src/railway.py"
+tail = true
+
+[module/xworkspaces]
+type = internal/xworkspaces
+
+label-active = %name%
+label-active-background = ${colors.background-alt}
+label-active-underline= ${colors.primary}
+label-active-padding = 1
+
+label-occupied = %name%
+label-occupied-padding = 1
+
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${colors.disabled}
+label-empty-padding = 1
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:60:...%
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #ffb52a
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume-prefix = "VOL "
+format-volume-prefix-foreground = ${colors.primary}
+format-volume = <label-volume>
+
+label-volume = %percentage%%
+
+label-muted = muted
+label-muted-foreground = ${colors.disabled}
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+label-layout = %layout%
+label-layout-foreground = ${colors.primary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-foreground = ${colors.background}
+label-indicator-background = ${colors.secondary}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "CPU "
+format-prefix-foreground = ${colors.primary}
+label = %percentage:2%%
+
+[module/date]
+type = internal/date
+date = %%{F#fff}%m/%d/%Y %%{F-} %%{F#fff}%I:%M%p%{F-}
+date-alt = %%{F#fff} %A, %B %d, %Y %%{F-} %%{F#fff} %I:%M%p %{F#666}%%{F#fba922}%S%%{F-}
+
+[module/wallchanger]
+type = custom/text
+content = "WALL"
+click-left = "/home/axel/repos/set-wallpapers/set-wallpaper.sh"
+
+; vim:ft=dosini
