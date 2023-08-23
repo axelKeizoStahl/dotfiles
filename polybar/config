@@ -9,10 +9,10 @@
 ;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 ;
 ;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/polybar/polybar
+;   Learn more about configuring Polybar at:
+;   https://github.com/polybar/polybar
 ;
-;   The README contains a lot of information
+;   The README contains a wealth of information
 ;
 ;==========================================================
 
@@ -25,16 +25,12 @@ secondary = #8ABEB7
 alert = #A54242
 disabled = #707880
 
-
 [bar/top]
 monitor = eDP1
-
 bottom = true
 width = 100%
 height = 19pt
 
-; dpi = 96
-
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -63,28 +59,16 @@ cursor-scroll = ns-resize
 
 enable-ipc = true
 
-; tray-position = right
-
-; wm-restack = generic
-wm-restack = bspwm
-; wm-restack = i3
-
-; override-redirect = true
-
 [bar/top_external]
 monitor = HDMI1
-
 bottom = true
 width = 100%
 height = 21pt
 
-; dpi = 96
-
 background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 3pt
-
 
 padding-left = 0
 padding-right = 1
@@ -108,14 +92,6 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 enable-ipc = true
-
-; tray-position = right
-
-; wm-restack = generic
-wm-restack = bspwm
-; wm-restack = i3
-
-; override-redirect = true
 
 [module/railway]
 type = custom/script
@@ -127,7 +103,7 @@ type = internal/xworkspaces
 
 label-active = %name%
 label-active-background = ${colors.background-alt}
-label-active-underline= ${colors.primary}
+label-active-underline = ${colors.primary}
 label-active-padding = 1
 
 label-occupied = %name%
@@ -213,4 +189,3 @@ type = custom/text
 content = "WALL"
 click-left = "/home/axel/repos/set-wallpapers/set-wallpaper.sh"
 
-; vim:ft=dosini

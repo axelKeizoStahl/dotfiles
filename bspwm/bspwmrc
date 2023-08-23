@@ -8,6 +8,8 @@ blugon &
 INTERNAL_MONITOR="eDP1"
 EXTERNAL_MONITOR="HDMI1"
 # on first load setup default workspaces
+bspc monitor "$EXTERNAL_MONITOR" -d 6 7 8 9 10
+bspc monitor "$INTERNAL_MONITOR" -d 1 2 3 4 5
 
 monitor_add() {
   # Move first 5 desktops to external monitor
@@ -48,8 +50,6 @@ else
   fi
 fi
 
-bspc monitor "$INTERNAL_MONITOR" -d 1 2 3 4 5
-bspc monitor "$EXTERNAL_MONITOR" -d 6 7 8 9 0
 
 #kill all polybar and relaunch in monitors
 killall -q polybar
