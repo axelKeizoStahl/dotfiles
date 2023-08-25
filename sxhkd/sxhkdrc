@@ -120,6 +120,7 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+
 #
 # volume
 #
@@ -131,3 +132,12 @@ XF86AudioMute
 # volume up/down
 XF86Audio{Raise,Lower}Volume
     pactl set-sink-volume @DEFAULT_SINK@ {+,-}7%
+
+#
+# brightness
+#
+
+# brightness up/down
+
+XF86MonBrightness{Up,Down}
+    xbacklight -{inc,dec} 10
