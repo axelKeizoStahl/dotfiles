@@ -119,7 +119,7 @@ label-empty-padding = 1
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:60:...%
+label = %title:0:40:...%
 
 [module/battery]
 type = internal/battery
@@ -187,5 +187,6 @@ date-alt = %%{F#fff} %A, %B %d, %Y %%{F-} %%{F#fff} %I:%M%p %{F#666}%%{F#fba922}
 [module/wallchanger]
 type = custom/text
 content = "WALL"
-click-left = "/home/axel/repos/set-wallpapers/set-wallpaper.sh"
+click-left = "feh -z --bg-fill /home/axel/Downloads/images/"
+
 
