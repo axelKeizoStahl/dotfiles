@@ -180,7 +180,7 @@ exec autotiling &
 exec lxsession &
 exec mako &
 exec udiskie &
-exec gammastep -l 40:-74 &
+exec_always gammastep -l 40:-74 &
 #^^ come and find me lol
 
 client.focused #ebdbb2 #ebdbb2 #ebdbb2 #ebdbb2 #ebdbb2
