@@ -180,7 +180,8 @@ exec autotiling &
 exec lxsession &
 exec mako &
 exec udiskie &
-exec wlsunset -l 59.2 -L 17.7 &
+exec gammastep -l 40:-74 &
+#^^ come and find me lol
 
 client.focused #ebdbb2 #ebdbb2 #ebdbb2 #ebdbb2 #ebdbb2
 client.unfocused #453a3a #453a3a #453a3a #453a3a #453a3a
