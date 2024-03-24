@@ -2,15 +2,17 @@
     border: none;
     border-radius: 0;
     font-family: JetBrains Mono;
-    font-size: 14px;
+    font-size: 17px;
     min-height: 0;
     margin: 0 0px;
 }
 
+
 window#waybar {
-    background-color: #3c3836;
+    border-radius: 10px;
     border-bottom: none;
-    color: #ebdbb2;
+    background-color: transparent;
+    color: white;
     transition-property: background-color;
     transition-duration: 0.5s;
 }
@@ -19,13 +21,16 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
+#workspaces {
+    margin: 0 50px;
+}
+
 #workspaces button {
     padding: 0 5px;
-    color: #ebdbb2;
+    color: white;
     border-radius: 5px;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
     box-shadow: inherit;
@@ -34,8 +39,7 @@ window#waybar.hidden {
 }
 
 #workspaces button.focused {
-    background-color: #ebdbb2;
-    color: #282828;
+    background-color: black;
     border-bottom: none;
     border-radius: 5px;
 }
@@ -56,25 +60,22 @@ window#waybar.hidden {
 #pulseaudio,
 #mode,
 #idle_inhibitor,
+#cpu,
+#memory,
 #mpd {
     padding: 0 14px;
     margin: 0 0px;
-    color: #ffffff;
+    color: white;
+    background-color: black;
 }
 
-#clock {
-    color: #000000;
-    background-color: #ebdbb2;
+#clock,
+#custom-search {
+  border-radius: 5px;
 }
 
 #battery {
-    background-color: #ebdbb2;
-    color: #000000;
-}
-
-#battery.charging {
-    color: #000000;
-    background-color: #ebdbb2;
+    border-radius: 0 5px 5px 0;
 }
 
 @keyframes blink {
@@ -98,29 +99,8 @@ label:focus {
     background-color: #000000;
 }
 
-#backlight {
-    background-color: #ebdbb2;
-    color: #000000;
-}
-
-#network {
-    background-color: #ebdbb2;
-    color: #000000;
-}
-
-#network.disconnected {
-    background-color: #ebdbb2;
-}
-
 #pulseaudio {
-    background-color: #ebdbb2;
-    color: #000000;
     border-radius: 5px 0px 0px 5px;
-}
-
-#pulseaudio.muted {
-    background-color: #ebdbb2;
-    color: #000000;
 }
 
 #idle_inhibitor {
