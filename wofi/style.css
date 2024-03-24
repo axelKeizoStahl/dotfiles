@@ -1,46 +1,51 @@
-window {
-margin: 5px;
-border: 2px solid #ebdbb2;
-background-color: #ebdbb2;
+#window {
+margin: 2px;
+background-color: #0f0404;
 font-family: JetBrains Mono;
-font-size: 14px;
+font-size: 16px;
 border-radius: 10px;
+opacity: 0.98;
+border: 2px solid #100c38;
 }
 
 #input {
 margin: 5px;
-border: 2px solid #282828;
-background-color: #282828;
+border: 2px solid #fce300;
+border-radius: 10px;
+background-color: #0f0404;
+text-align: center;
+padding: 10px;
 }
 
 #inner-box {
 margin: 5px;
-border: 2px solid #282828;
-background-color: #282828;
+border: 2px solid #0f0404;
+background-color: #0f0404;
 }
 
 #outer-box {
 margin: 5px;
-border: 2px solid #282828;
-background-color: #282828;
+border: 2px solid #0f0404;
+background-color: #0f0404;
 border-radius: 10px;
 }
 
 #scroll {
 margin: 5px;
-border: 2px solid #282828;
-background-color: #282828;
+border: 2px solid #0f0404;
+background-color: #0f0404;
 }
 
 #text {
 margin: 5px;
-border: 2px #282828;
-color: #ebdbb2;
+border: 2px #0f0404;
+color: white;
+text-align: center;
 }
  #entry:selected {
-background-color: #ebdbb2;
+background-color: #0f0404;
 }
 #text:selected {
-color: #282828;
+color: #0f0404;
 }
 
