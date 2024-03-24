@@ -6,16 +6,12 @@ set $down j
 set $up k
 set $right l
 
-set $term terminator
-set $menu wofi
+set $term kitty
+set $dmenu wofi
+set $powoff ~/.config/sway/powermenu.sh
+set $search ~/.config/waybar/firefox-quicksearch.sh
+set $nextwin ~/.config/sway/nextwindow.sh
 
-
-
-# Touchscreen
-input type:touch {
-    map_to_output eDP-1
-    #events disabled
-}
 
 # Trackpad
 input type:touchpad {
@@ -37,8 +33,7 @@ input '1452:591:hfd.cn_USB_DEVICE' {
     xkb_variant "intl"
 }
 
-set $lock 'grim /tmp/screen.png; corrupter /tmp/screen.png /tmp/screen.png; swaylock -fi /tmp/screen.png --effect-vignette 0.5:0.5 --clock --indicator-radius 100 --indicator-thickness 7  --ring-color ebdbb2 --key-hl-color 282828 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --fade-in 0.2'
-set $lidlock 'swaylock -i /home/theo/Pictures/archpc_gruvbox_glitch.png --effect-vignette 0.5:0.5 --clock --indicator-radius 100 --indicator-thickness 7  --ring-color ebdbb2 --key-hl-color 282828 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --fade-in 0.2'
+set $lock '~/.config/sway/swaylock.sh'
 
 set $laptop_screen 'eDP-1'
 
@@ -46,32 +41,20 @@ bindswitch --reload --locked lid:on output $laptop_screen disable
 
 bindswitch --reload --locked lid:off output $laptop_screen enable
 
-# output eDP-1 {
-# 	pos 0 0
-# 	resolution 1920x1080
-# }
-output HDMI-A-1 transform 270
-output * {
-    adaptive_sync off
-}
-
-
-output * bg ~/Pictures/archpc_gruvbox.png fill
-
-exec swayidle timeout 510 'brightnessctl -s && brightnessctl set 5%' resume 'brightnessctl -r' timeout 540 'grim /tmp/screen.png; corrupter /tmp/screen.png /tmp/screen.png; swaylock -fi /tmp/screen.png --effect-vignette 0.5:0.5 --clock --indicator-radius 100 --indicator-thickness 7  --ring-color ebdbb2 --key-hl-color 282828 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --grace 2 --fade-in 0.2' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' timeout 900 'systemctl suspend'
-exec swayidle before-sleep $lidlock
-
-bindsym $mod+Return exec $term
+bindsym $mod+Shift+t exec $term
+bindsym $mod+Shift+q exec $powoff
+bindsym $mod+Shift+f exec firefox
 bindsym $mod+Shift+w kill
-bindsym $mod+d exec $menu
+bindsym $mod+Alt+space exec $search
+bindsym $mod+d exec $dmenu
 bindsym $mod+escape exec $lock
-bindsym Print exec ~/.scripts/screenshot
+bindsym Print exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screenshot_%Y-%m-%d-%H%M%S.png') && notify-send "Screenshot Taken: /$(date +'screenshot_%Y-%m-%d-%H%M%S.png')"
 bindsym $mod+Home exec pkill waybar && waybar
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86AudioMute exec pamixer -t
-bindsym XF86AudioLowerVolume exec pamixer -d 5 && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
-bindsym XF86AudioRaiseVolume exec pamixer -i 5 && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -7%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +7%
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
@@ -97,6 +80,35 @@ bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
+
+#------------------------------#
+# Always float certain windows #
+#------------------------------#
+#swaymsg -t get_tree | grep app_id
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
+for_window [app_id="pop-up"]                     floating enable
+for_window [app_id="bubble"]                     floating enable
+for_window [app_id="task_dialog"]                floating enable
+for_window [app_id="Preferences"]                floating enable
+for_window [app_id="dialog"]                     floating enable
+for_window [app_id="menu"]                       floating enable
+for_window [app_id="Organizer"]                  floating enable
+for_window [app_id="About"]                      floating enable
+for_window [app_id="toolbox"]                    floating enable
+for_window [app_id="page-info"]                  floating enable
+for_window [app_id="webconsole"]                 floating enable
+for_window [app_id="Authy"]                      floating enable
+for_window [app_id="termfloat"]                  floating enable
+for_window [app_id="termfloat"]                  resize set height 540
+for_window [app_id="termfloat"]                  resize set width 960
+for_window [app_id="mpv"]                        floating enable
+for_window [app_id="mpv"]                        resize set height 540
+for_window [app_id="mpv"]                        resize set width 960
+for_window [app_id="Nautilus"]                   floating enable
+for_window [app_id="Nautilus"]                   resize set height 540
+for_window [app_id="Nautilus"]                   resize set width 960
+
 #
 # Workspaces:
 #
@@ -111,6 +123,9 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
+bindsym $mod+bracketright exec swaymsg workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') + 1)
+bindsym $mod+bracketleft exec swaymsg workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') - 1)
+
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
@@ -122,6 +137,10 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+shift+bracketright exec swaymsg move container to workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') + 1) && swaymsg workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') + 1)
+
+bindsym $mod+shift+bracketleft exec swaymsg move container to workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') - 1) && swaymsg workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') - 1)
+
 
 # Move workspace to different display.
 bindsym $mod+Control+Shift+l move workspace to output right
@@ -150,6 +169,14 @@ bindsym $mod+Shift+space floating toggle
 # Swap focus between the tiling area and the floating area
 bindsym $mod+space focus mode_toggle
 
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Ctrl+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+Ctrl+minus scratchpad show
+
 # Resizing containers:
 #
 mode "resize" {
@@ -167,9 +194,8 @@ bindsym $mod+r mode "resize"
 
 default_border pixel 2
 
-smart_gaps on
-gaps inner 10
-gaps outer -10
+gaps inner 4
+gaps outer 4
 gaps bottom 1
 gaps top 1
 
@@ -180,17 +206,12 @@ exec autotiling &
 exec lxsession &
 exec mako &
 exec udiskie &
-exec_always gammastep -l 40:-74 &
-#^^ come and find me lol
+exec gammastep -O 6500K &
+exec swaybg -i ~/Downloads/wallhaven-2ywxm9.jpg
 
-client.focused #ebdbb2 #ebdbb2 #ebdbb2 #ebdbb2 #ebdbb2
-client.unfocused #453a3a #453a3a #453a3a #453a3a #453a3a
-client.focused_inactive #453a3a #453a3a #453a3a #453a3a #453a3a
+client.focused #fce300 #fce300 #fce300 #fce300 #fce300
+client.unfocused #100c38 #100c38 #100c38 #100c38 #100c38
+client.focused_inactive #100c38 #100c38 #100c38 #100c38 #100c38
 
-
-#border_images.focused /home/theo/.config/sway/shadows.png
-#border_images.focused_inactive /home/theo/.config/sway/shadows.png
-#border_images.unfocused /home/theo/.config/sway/shadows.png
-#border_images.urgent /home/theo/.config/sway/shadows.png
 
 include /etc/sway/config.d/*
