@@ -8,10 +8,9 @@ set $right l
 
 set $term kitty
 set $dmenu wofi
-set $powoff ~/.config/sway/powermenu.sh
+set $powoff ~/.config/sway/scripts/powermenu.sh
 set $search ~/.config/waybar/firefox-quicksearch.sh
-set $nextwin ~/.config/sway/nextwindow.sh
-
+set $nextwin ~/.config/sway/scripts/curr_window.sh
 
 # Trackpad
 input type:touchpad {
@@ -19,18 +18,6 @@ input type:touchpad {
 	drag enabled
 	natural_scroll enabled
     scroll_factor 0.5
-}
-
-# Trackpoint
-input "1267:32:Elan_TrackPoint" {
-    events disabled
-    # pointer_accel -1
-    # accel_profile "flat"
-}
-
-input '1452:591:hfd.cn_USB_DEVICE' {
-    xkb_layout "us"
-    xkb_variant "intl"
 }
 
 set $lock '~/.config/sway/swaylock.sh'
@@ -123,9 +110,9 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
-bindsym $mod+bracketright exec swaymsg workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') + 1)
-bindsym $mod+bracketleft exec swaymsg workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') - 1)
+bindsym $mod+bracketright exec swaymsg workspace number $(expr $($nextwin) + 1)
 
+bindsym $mod+bracketleft exec swaymsg workspace number $(expr $($nextwin) - 1)
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
@@ -137,10 +124,8 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
-bindsym $mod+shift+bracketright exec swaymsg move container to workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') + 1) && swaymsg workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') + 1)
-
-bindsym $mod+shift+bracketleft exec swaymsg move container to workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') - 1) && swaymsg workspace number $(expr $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name' | grep -o -E '^[0-9]+') - 1)
-
+bindsym $mod+shift+bracketright exec swaymsg move container to workspace number $(expr $($nextwin) + 1) && swaymsg workspace number $(expr $($nextwin) + 1)
+bindsym $mod+shift+bracketleft exec swaymsg move container to workspace number $(expr $($nextwin) - 1) && swaymsg workspace number $(expr $($nextwin) - 1)
 
 # Move workspace to different display.
 bindsym $mod+Control+Shift+l move workspace to output right
@@ -201,7 +186,8 @@ gaps top 1
 
 xwayland enable
 
-exec waybar &
+exec_always killall waybar &
+exec_always waybar &
 exec autotiling &
 exec lxsession &
 exec mako &
