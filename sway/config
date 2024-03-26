@@ -190,14 +190,14 @@ exec_always killall waybar &
 exec_always waybar &
 exec autotiling &
 exec lxsession &
-exec mako &
+exec_always killall mako &
+exec_always mako &
 exec udiskie &
 exec gammastep -O 6500K &
 exec swaybg -i ~/Downloads/wallhaven-2ywxm9.jpg
 
 client.focused #fce300 #fce300 #fce300 #fce300 #fce300
 client.unfocused #100c38 #100c38 #100c38 #100c38 #100c38
-client.focused_inactive #100c38 #100c38 #100c38 #100c38 #100c38
-
+client.focused_inactive #fce300 #fce300 #fce300 #fce300 #fce300
 
 include /etc/sway/config.d/*
