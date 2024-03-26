@@ -12,7 +12,7 @@ window#waybar {
     border-radius: 10px;
     border-bottom: none;
     background-color: transparent;
-    color: white;
+    color: yellow;
     transition-property: background-color;
     transition-duration: 0.5s;
 }
@@ -27,7 +27,7 @@ window#waybar.hidden {
 
 #workspaces button {
     padding: 0 5px;
-    color: white;
+    color: yellow;
     border-radius: 5px;
 }
 
@@ -65,7 +65,7 @@ window#waybar.hidden {
 #mpd {
     padding: 0 14px;
     margin: 0 0px;
-    color: white;
+    color: yellow;
     background-color: black;
 }
 
