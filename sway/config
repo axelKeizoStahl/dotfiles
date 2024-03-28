@@ -193,8 +193,8 @@ exec lxsession &
 exec_always killall mako &
 exec_always mako &
 exec udiskie &
-exec gammastep -O 6500K &
-exec swaybg -i ~/Downloads/wallhaven-2ywxm9.jpg
+exec_always gammastep &
+exec_always ~/.config/sway/scripts/wallpaper_set.sh
 
 client.focused #fce300 #fce300 #fce300 #fce300 #fce300
 client.unfocused #100c38 #100c38 #100c38 #100c38 #100c38
