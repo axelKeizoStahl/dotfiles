@@ -28,10 +28,13 @@ bindswitch --reload --locked lid:on output $laptop_screen disable
 
 bindswitch --reload --locked lid:off output $laptop_screen enable
 
-bindsym $mod+Shift+t exec $term
+output HDMI-A-1 pos 1920 0
+output eDP1 pos 0 0
+
+bindsym $mod+return exec $term
 bindsym $mod+Shift+q exec $powoff
 bindsym $mod+Shift+f exec firefox
-bindsym $mod+Shift+w kill
+bindsym $mod+w kill
 bindsym $mod+Alt+space exec $search
 bindsym $mod+d exec $dmenu
 bindsym $mod+escape exec $lock
@@ -142,7 +145,6 @@ bindsym $mod+Control+Shift+k move workspace to output up
 # respectively.
 bindsym $mod+b splith
 bindsym $mod+v splitv
-bindsym $mod+w layout tabbed
 
 # Switch the current container between different layout styles
 # Make the current focus fullscreen
