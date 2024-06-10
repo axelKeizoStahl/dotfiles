@@ -28,17 +28,18 @@ bindswitch --reload --locked lid:on output $laptop_screen disable
 
 bindswitch --reload --locked lid:off output $laptop_screen enable
 
-output HDMI-A-1 pos 1920 0
-output eDP1 pos 0 0
+output HDMI-A-1 mode 1920x1080@143.981hz pos 200,0
+output eDP-1 pos 0,1080
 
 bindsym $mod+return exec $term
 bindsym $mod+Shift+q exec $powoff
-bindsym $mod+Shift+f exec firefox
+bindsym $mod+b exec firefox
 bindsym $mod+w kill
+bindsym $mod+Shift+d exec killall /opt/discord/Discord
 bindsym $mod+Alt+space exec $search
 bindsym $mod+d exec $dmenu
 bindsym $mod+escape exec $lock
-bindsym Print exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screenshot_%Y-%m-%d-%H%M%S.png') && notify-send "Screenshot Taken: /$(date +'screenshot_%Y-%m-%d-%H%M%S.png')"
+bindsym Print exec ~/.config/sway/scripts/screenshot.sh
 bindsym $mod+Home exec pkill waybar && waybar
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
@@ -143,7 +144,7 @@ bindsym $mod+Control+Shift+k move workspace to output up
 # You can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
 # respectively.
-bindsym $mod+b splith
+#bindsym $mod+b splith
 bindsym $mod+v splitv
 
 # Switch the current container between different layout styles
@@ -188,12 +189,14 @@ gaps top 1
 
 xwayland enable
 
-exec_always killall waybar &
-exec_always waybar &
+exec $term --title Scratchpad
+exec discord
+for_window [title="Scratchpad"] move scratchpad
+for_window [class="discord"] move scratchpad
+exec waybar &
 exec autotiling &
 exec lxsession &
-exec_always killall mako &
-exec_always mako &
+exec mako &
 exec udiskie &
 exec_always gammastep &
 exec_always ~/.config/sway/scripts/wallpaper_set.sh
