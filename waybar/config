@@ -3,9 +3,9 @@
   "position": "bottom",
     "height": 25,
     "margin": "5",
-    "modules-center": ["clock", "sway/workspaces", "sway/scratchpad", "sway/mode", "pulseaudio", "cpu", "network", "backlight", "battery"],
-    "modules-left": [],
-    "modules-right": [],
+    "modules-center": ["sway/workspaces"],
+    "modules-left": ["clock"],
+    "modules-right": ["sway/scratchpad", "sway/mode", "pulseaudio", "cpu", "network", "backlight", "battery"],
     "sway/workspaces": {
       "disable-scroll": true,
       "persistent-workspaces": {
@@ -24,7 +24,7 @@
       "format": "<span style=\"italic\">{}</span>"
     },
     "sway/scratchpad": {
-      "format": "{icon} {count}",
+      "format": "{icon} {count} ",
       "show-empty": false,
       "format-icons": ["", ""],
       "tooltip": true,
@@ -61,11 +61,6 @@
     },
     "battery": {
       "bat": "BAT0",
-      "states": {
-        "good": 95,
-        "warning": 30,
-        "critical": 15
-      },
       "format": "{capacity}% {icon}",
       "format-charging": "{capacity}% 󰂄",
       "format-plugged": "{capacity}% ",
@@ -83,15 +78,12 @@
     },
     "pulseaudio": {
       "scroll-step": 1,
-      "format": "{icon} {volume}    {format_source}",
-      "format-bluetooth": "{volume}% {icon} {format_source}",
-      "format-bluetooth-muted": "󰝟 {icon} {format_source}",
-      "format-muted": "󰝟   {format_source}",
-      "format-source": " {volume}",
-      "format-source-muted": "",
+      "format": "{icon} {volume}",
+      "format-bluetooth": "{volume}% {icon}",
+      "format-bluetooth-muted": " {icon}",
       "format-icons": {
         "headphone": "",
-        "default": ["", "", ""]
+        "default": [" ", " ", " "]
       },
       "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },

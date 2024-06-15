@@ -2,7 +2,7 @@
     border: none;
     border-radius: 0;
     font-family: JetBrains Mono;
-    font-size: 17px;
+    font-size: 19px;
     min-height: 0;
     margin: 0 0px;
 }
@@ -12,7 +12,7 @@ window#waybar {
     border-radius: 10px;
     border-bottom: none;
     background-color: transparent;
-    color: yellow;
+    color: white;
     transition-property: background-color;
     transition-duration: 0.5s;
 }
@@ -27,7 +27,7 @@ window#waybar.hidden {
 
 #workspaces button {
     padding: 0 5px;
-    color: yellow;
+    color: white;
     border-radius: 5px;
 }
 
@@ -39,9 +39,11 @@ window#waybar.hidden {
 }
 
 #workspaces button.focused {
-    background-color: black;
+    background-color: #0f0404;
     border-bottom: none;
     border-radius: 5px;
+    color: yellow;
+    border-radius: 15px;
 }
 
 #workspaces button.urgent {
@@ -65,17 +67,25 @@ window#waybar.hidden {
 #mpd {
     padding: 0 14px;
     margin: 0 0px;
-    color: yellow;
+    color: white;
     background-color: black;
+}
+
+#clock {
+    margin-left: 100px;
+    color: yellow;
+    padding: 8px 15px;
+    background-color: #0f0404;
 }
 
 #clock,
 #custom-search {
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 #battery {
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 20px 20px 0;
+    margin-right: 50px;
 }
 
 @keyframes blink {
@@ -100,7 +110,7 @@ label:focus {
 }
 
 #pulseaudio {
-    border-radius: 5px 0px 0px 5px;
+    border-radius: 20px 0px 0px 20px;
 }
 
 #idle_inhibitor {
