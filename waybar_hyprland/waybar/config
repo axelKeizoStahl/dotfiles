@@ -1,0 +1,96 @@
+{
+  "layer": "top",
+  "position": "bottom",
+    "height": 25,
+    "margin": "5",
+    "modules-center": ["hyprland/workspaces" ],
+    "modules-left": ["clock"],
+    "modules-right": ["hyprland/submap", "pulseaudio", "cpu", "network", "backlight", "battery"],
+    "hyprland/workspaces": {
+      "disable-scroll": true,
+      "persistent-workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": [],
+        "6": [],
+        "7": [],
+        //"8": [],
+        //"9": []
+      }
+    },
+    "hyprland/submap": {
+      "format": "<span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      }
+    },
+    "cpu": {
+      "interval": 1,
+      "format": "<span>󰻠</span> {usage}%"
+    },
+    "memory": {
+      "interval": 300,
+      "format": "<span>󰍛</span> {percentage}%",
+      "tooltip-format": "{used:0.2f}GiB used out of {total:0.2f}GiB"
+    },
+    "custom/search": {
+      "format": "   ",
+      "on-click": "~/.config/waybar/quicksearch.sh"
+    },
+    "clock": {
+      "format": "{:%I:%M %p}",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "format-alt": "{:%Y-%m-%d}"
+    },
+    "backlight": {
+      "format": "{percent}% {icon}",
+      "format-icons": ["", ""]
+    },
+    "battery": {
+      "bat": "BAT0",
+      "states": {
+        "good": 95,
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-charging": "{capacity}% 󰂄",
+      "format-plugged": "{capacity}% ",
+      "format-alt": "{time} {icon}",
+      "format-good": "󱟢",
+      "format-full": "100% 󱟦",
+      "format-icons": ["󱊡", "󱊢", "󱊣"]
+    },
+    "network": {
+      "format": "{ifname}",
+      "format-ethernet": "{ifname} ",
+      "format-wifi": "{essid} ",
+      "format-disconnected": "Disconnected ⚠",
+      "on-click": "networkmanager_dmenu"
+    },
+    "pulseaudio": {
+      "scroll-step": 1,
+      "format": "{icon} {volume}    {format_source}",
+      "format-bluetooth": "{volume}% {icon} {format_source}",
+      "format-bluetooth-muted": "󰝟 {icon} {format_source}",
+      "format-muted": "󰝟   {format_source}",
+      "format-source": " {volume}",
+      "format-source-muted": "",
+      "format-icons": {
+        "headphone": "",
+        "default": ["", "", ""]
+      },
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+    "temperature": {
+      "hwmon-path": "/sys/class/hwmon/hwmon4/temp2_input",
+      "format": " {temperatureF}°F",
+      "tooltip": false
+    },
+}
