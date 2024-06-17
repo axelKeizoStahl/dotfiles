@@ -2,7 +2,6 @@
     border: none;
     border-radius: 0;
     font-family: JetBrains Mono;
-    font-size: 19px;
     min-height: 0;
     margin: 0 0px;
 }
@@ -23,6 +22,7 @@ window#waybar.hidden {
 
 #workspaces {
     margin: 0 50px;
+    font-size: 22px;
 }
 
 #workspaces button {
@@ -39,7 +39,7 @@ window#waybar.hidden {
 }
 
 #workspaces button.focused {
-    background-color: #0f0404;
+    background: rgba(0, 0, 0, 0.2);
     border-bottom: none;
     border-radius: 5px;
     color: yellow;
@@ -64,7 +64,9 @@ window#waybar.hidden {
 #idle_inhibitor,
 #cpu,
 #memory,
+#custom-weather,
 #mpd {
+    font-size: 19px;
     padding: 0 14px;
     margin: 0 0px;
     color: white;
